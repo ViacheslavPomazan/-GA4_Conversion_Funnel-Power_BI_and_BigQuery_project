@@ -13,5 +13,22 @@ The primary goal is to visualize the user journey from the 'session_start' to th
 * <b>Data Extraction:</b> Advanced SQL query in BigQuery to unnest event parameters and flatten the hierarchical GA4 structure.
 * <b>BI Tool:</b> Power BI for creating an interactive dashboard with DAX measures to calculate conversion steps and drop-off rates.
 
-  
+## Gallery
+1. 
+![Funnel](image/Conversion_Funnel1.png)
+
+2.
+![Matrixl](image/Matrix1.png)
+
+3.
+![Traffic](image/Traffic_and_Journey1.png)
+
+## Technical Highlights : ⭐
+🔹 SQL Query performs the following functions:
+   *  Data Flattening: Unnested GA4 event parameters to transform hierarchical JSON-like data into a flat relational structure.
+   *  Data Quality & Cleaning: Filtered 7 key funnel events and handled session inconsistencies (removed sessions with multiple or missing session_start).
+   *  Scale: Successfully processed a final table of 867K+ rows for Power BI visualization.
+
+
+ 
 
