@@ -90,7 +90,7 @@ ON st.user_session_id = i.user_session_id
 3.
 ![Traffic](image/Traffic_and_Journey1.png)
 
-![Power BI report video review](https://drive.google.com/file/d/1LuuwnS-S5D4HYdjOM13_iF8XBXzkgG9V/view?usp=sharing)
+[Power BI report video review](https://drive.google.com/file/d/1LuuwnS-S5D4HYdjOM13_iF8XBXzkgG9V/view?usp=sharing)
 
 ## Power BI Highlights: ⭐
 
