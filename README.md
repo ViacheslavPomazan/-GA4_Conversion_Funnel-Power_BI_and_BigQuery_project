@@ -100,10 +100,32 @@ ON st.user_session_id = i.user_session_id
 ![model](image/ga1_funnel_model1.png)
 </details>
 
+* To enable deep-dive segmentation, I developed a GA4 Session-Event Fact Table(GAFT). This table consolidates core GA4 events with their respective session attributes (Source, Medium, Device, etc.), allowing for seamless filtering across all funnel stages.
 <details>
-<summary>Creating GA4 Session-Event Fact Table(GAFT):</summary>
+<summary>DAX code for creating Calculated Table GAFT:</summary>
 
-To enable deep-dive segmentation, I developed a GA4 Session-Event Fact Table(GAFT). This table consolidates core GA4 events with their respective session attributes (Source, Medium, Device, etc.), allowing for seamless filtering across all funnel stages.
+```
+GAFT =
+ADDCOLUMNS (
+    SUMMARIZE (
+        GA4,
+        GA4[user_session_id],
+        GA4[event_name],
+        "FirstEventTime",
+            CALCULATE (
+                MIN ( GA4[event_datetime] )
+            )
+    ),
+    "Source", CALCULATE ( SELECTEDVALUE(GA4[source])),
+    "Medium", CALCULATE ( SELECTEDVALUE(GA4[medium])),
+    "Campaign", CALCULATE ( SELECTEDVALUE(GA4[campaign])),
+    "Device Category",  CALCULATE (SELECTEDVALUE(GA4[device_category])),
+    "Operating System", CALCULATE (SELECTEDVALUE(GA4[operating_system])),
+    "Device Language",  CALCULATE (SELECTEDVALUE(GA4[device_language])),
+    "Landing Page",  CALCULATE (SELECTEDVALUE(GA4[landing_page_location])),
+    "Country",  CALCULATE (SELECTEDVALUE(GA4[country]))
+)
+```
 </details>
 
 ## Tableau Gallery
