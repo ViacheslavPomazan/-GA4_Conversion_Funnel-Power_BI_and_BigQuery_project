@@ -246,16 +246,20 @@ VAR TotalSessions =
     -- count the total number of unique sessions where the 1st Event occurred.
     CALCULATE(
               DISTINCTCOUNT(GAFT[SessionID]),
-              FILTER(ALL(GAFT[Event]), GAFT[Event] = FirstEvent),
-              ALLEXCEPT(GAFT, GAFT[Country])      
+              FILTER(
+                    ALLEXCEPT(GAFT, GAFT[Country])
+                     ),
+              GAFT[Event] = FirstEvent      
     )
 
 VAR EventSessions =
     -- count the total number of unique sessions where the 2nd Event occurred.
     CALCULATE(
               DISTINCTCOUNT(GAFT[SessionID]),
-              FILTER(ALL(GAFT[Event]), GAFT[Event] = SecondEvent),
-              ALLEXCEPT(GAFT, GAFT[Country])
+              FILTER(
+                    ALLEXCEPT(GAFT, GAFT[Country])
+                    ),
+              GAFT[Event] = SecondEvent
              )
    
 RETURN
