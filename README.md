@@ -130,7 +130,103 @@ ADDCOLUMNS (
 ```
 </details>
 
-* 
+* To build correlation matrix, a DAX calculated table GAFT_Pivoted, that transforms the long event list into a wide format, was developed. Each session is mapped against 7 core events to identify behavioral patterns and event-to-event dependencies using a correlation matrix.
+
+<details>
+<summary>DAX code for creating Calculated Table GAFT_Pivoted:</summary>
+
+```
+GAFT_Pivoted =
+SUMMARIZE(
+    GAFT,
+    GAFT[SessionID],
+
+    -- 1. session_start
+    "session_start",
+        IF(
+            CALCULATE(
+                COUNTROWS(GAFT),
+                FILTER(GAFT, GAFT[Event] = "session_start")
+            ) > 0,
+            1,
+            0
+        ),
+
+
+    -- 2. view_item
+    "view_item",
+        IF(
+            CALCULATE(
+                COUNTROWS(GAFT),
+                FILTER(GAFT, GAFT[Event] = "view_item")
+            ) > 0,
+            1,
+            0
+        ),
+
+
+    -- 3. add_to_cart
+    "add_to_cart",
+        IF(
+            CALCULATE(
+                COUNTROWS(GAFT),
+                FILTER(GAFT, GAFT[Event] = "add_to_cart")
+            ) > 0,
+            1,
+            0
+        ),
+
+
+    -- 4. begin_checkout
+    "begin_checkout",
+        IF(
+            CALCULATE(
+                COUNTROWS(GAFT),
+                FILTER(GAFT, GAFT[Event] = "begin_checkout")
+            ) > 0,
+            1,
+            0
+        ),
+
+
+    -- 5. add_shipping_info
+    "add_shipping_info",
+        IF(
+            CALCULATE(
+                COUNTROWS(GAFT),
+                FILTER(GAFT, GAFT[Event] = "add_shipping_info")
+            ) > 0,
+            1,
+            0
+        ),
+
+
+    -- 6. add_payment_info
+    "add_payment_info",
+        IF(
+            CALCULATE(
+                COUNTROWS(GAFT),
+                FILTER(GAFT, GAFT[Event] = "add_payment_info")
+            ) > 0,
+            1,
+            0
+        ),
+
+
+    -- 7. purchase
+    "purchase",
+        IF(
+            CALCULATE(
+                COUNTROWS(GAFT),
+                FILTER(GAFT, GAFT[Event] = "purchase")
+            ) > 0,
+            1,
+            0
+        )
+)
+```
+</detailes>
+
 
 ## Tableau Gallery
 
