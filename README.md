@@ -394,6 +394,8 @@ plt.show()
 
 ## Tableau Highlights: ⭐
 
+### 🔹 <b>Calculated Fields and LOD Expressions</b>
+
 <details>
 <summary><b>Dynamic Multi-Segment Funnel Conversion</b>.</summary>
 This combination of formulas calculates the conversion rate for each funnel step relative to the initial event, ensuring full flexibility when switching between different data segments.
@@ -421,7 +423,7 @@ IF [event_name] = [Select_first_event] THEN [Event_Datetime] END
 IF [event_name] = [Select_second_event] THEN [Event_Datetime] END
 ```
 
-* Session-Level Fixed Latency - utilizes FIXED LOD expressions to anchor the earliest occurrence of each event to the specific `user_session_id`.  
+* Session-Level Fixed Event Timestamp - utilizes FIXED LOD expressions to anchor the earliest occurrence of each event to the specific `user_session_id`.  
   Time_min_first_event; Time_min_second_event : 
 ```sql
 {FIXED [user_session_id] : MIN([Time_of_first_event])}
@@ -437,6 +439,11 @@ DATEDIFF('second', [Time_min_first_event], [Time_min_second_event]) END)})
 ```
 Note: By using LOD expressions, this logic remains accurate even when the view is filtered by other dimensions, providing a stable foundation for calculating "Average Time to Purchase" across different countries or traffic sources.
 </details>
+
+### 🔹 <b>Data Visualization</b>
+
+* A dual-axis map designed to display the geographical distribution of three distinct metrics concurrently.
+
 
 ## Feedback and Collaboration 🙌
 
